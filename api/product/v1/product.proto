@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package product.v1;
+
+option go_package = "github.com/miladhzz/gkit/api/product/v1;productv1";
+
+// ProductService manages a product catalog and accepts orders.
+service ProductService {
+  // GetProduct retrieves a single product by ID.
+  rpc GetProduct(GetProductRequest) returns (Product);
+
+  // ListProducts returns a paginated list of products.
+  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse);
+
+  // PlaceOrder submits an order for a product.
+  rpc PlaceOrder(PlaceOrderRequest) returns (PlaceOrderResponse);
+}
+
+message Product {
+  string id    = 1;
+  string name  = 2;
+  double price = 3;
+}
+
+message GetProductRequest {
+  string id = 1;
+}
+
+message ListProductsRequest {
+  int32  page_size  = 1;
+  string page_token = 2;
+}
+
+message ListProductsResponse {
+  repeated Product products       = 1;
+  string           next_page_token = 2;
+}
+
+message PlaceOrderRequest {
+  string product_id = 1;
+  int32  quantity   = 2;
+}
+
+message PlaceOrderResponse {
+  string order_id = 1;
+  string status   = 2;
+}
