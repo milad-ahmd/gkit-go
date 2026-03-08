@@ -1,0 +1,146 @@
+{
+  "title": "gkit Service",
+  "uid": "gkit-service",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "id": 1,
+      "title": "HTTP Request Rate",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "expr": "sum(rate(http_requests_total[1m])) by (method, path, status)",
+          "legendFormat": "{{method}} {{path}} {{status}}"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "HTTP P99 Latency",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket[1m])) by (le, path))",
+          "legendFormat": "p99 {{path}}"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "s" } }
+    },
+    {
+      "id": 3,
+      "title": "gRPC Request Rate",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "targets": [
+        {
+          "expr": "sum(rate(grpc_server_requests_total[1m])) by (method, code)",
+          "legendFormat": "{{method}} {{code}}"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "gRPC P99 Latency",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.99, sum(rate(grpc_server_request_duration_seconds_bucket[1m])) by (le, method))",
+          "legendFormat": "p99 {{method}}"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "s" } }
+    },
+    {
+      "id": 5,
+      "title": "Worker Pool — Submitted vs Completed",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 16 },
+      "targets": [
+        {
+          "expr": "rate(gkit_pool_jobs_submitted_total[1m])",
+          "legendFormat": "submitted"
+        },
+        {
+          "expr": "rate(gkit_pool_jobs_completed_total[1m])",
+          "legendFormat": "completed"
+        },
+        {
+          "expr": "rate(gkit_pool_jobs_errors_total[1m])",
+          "legendFormat": "errors"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Cache Hit Rate",
+      "type": "gauge",
+      "gridPos": { "h": 8, "w": 6, "x": 12, "y": 16 },
+      "targets": [
+        {
+          "expr": "rate(gkit_cache_hits_total[5m]) / (rate(gkit_cache_hits_total[5m]) + rate(gkit_cache_misses_total[5m]))",
+          "legendFormat": "hit rate"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1,
+          "thresholds": {
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 0.5 },
+              { "color": "green", "value": 0.8 }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 7,
+      "title": "Cache Size",
+      "type": "stat",
+      "gridPos": { "h": 8, "w": 6, "x": 18, "y": 16 },
+      "targets": [
+        {
+          "expr": "gkit_cache_size",
+          "legendFormat": "items"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Go Goroutines",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 24 },
+      "targets": [
+        {
+          "expr": "go_goroutines",
+          "legendFormat": "goroutines"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Heap Allocations",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 24 },
+      "targets": [
+        {
+          "expr": "rate(go_gc_duration_seconds_count[1m])",
+          "legendFormat": "GC runs/s"
+        },
+        {
+          "expr": "go_memstats_heap_alloc_bytes",
+          "legendFormat": "heap bytes"
+        }
+      ],
+      "fieldConfig": { "overrides": [{ "matcher": { "id": "byName", "options": "heap bytes" }, "properties": [{ "id": "unit", "value": "bytes" }] }] }
+    }
+  ]
+}
