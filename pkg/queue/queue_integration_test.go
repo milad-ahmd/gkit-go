@@ -11,8 +11,7 @@ import (
 
 	"github.com/milad-ahmd/gkit-go/pkg/queue"
 	"github.com/milad-ahmd/gkit-go/pkg/store"
-	"github.com/testcontainers/testcontainers-go"
-	"github.com/testcontainers/testcontainers-go/wait"
+	"github.com/milad-ahmd/gkit-go/pkg/testutil"
 )
 
 const schema = `
@@ -34,33 +33,7 @@ func setupQueue(t *testing.T) (*store.DB, *queue.Queue) {
 	t.Helper()
 	ctx := context.Background()
 
-	c, err := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
-		ContainerRequest: testcontainers.ContainerRequest{
-			Image:        "postgres:16-alpine",
-			ExposedPorts: []string{"5432/tcp"},
-			Env: map[string]string{
-				"POSTGRES_USER":     "gkit",
-				"POSTGRES_PASSWORD": "secret",
-				"POSTGRES_DB":       "gkit",
-			},
-			WaitingFor: wait.ForListeningPort("5432/tcp"),
-		},
-		Started: true,
-	})
-	if err != nil {
-		t.Fatalf("start postgres: %v", err)
-	}
-	t.Cleanup(func() { _ = c.Terminate(ctx) })
-
-	host, _ := c.Host(ctx)
-	port, _ := c.MappedPort(ctx, "5432/tcp")
-	dsn := fmt.Sprintf("postgres://gkit:secret@%s:%s/gkit?sslmode=disable", host, port.Port())
-
-	db, err := store.Open(ctx, dsn)
-	if err != nil {
-		t.Fatalf("open store: %v", err)
-	}
-	t.Cleanup(db.Close)
+	db := testutil.StartPostgres(t)
 
 	if err := db.Exec(ctx, schema); err != nil {
 		t.Fatalf("create schema: %v", err)
@@ -71,7 +44,7 @@ func setupQueue(t *testing.T) (*store.DB, *queue.Queue) {
 }
 
 func TestQueue_Integration_EnqueueAndProcess(t *testing.T) {
-	db, q := setupQueue(t)
+	_, q := setupQueue(t)
 	ctx := context.Background()
 
 	type EmailJob struct{ To string }

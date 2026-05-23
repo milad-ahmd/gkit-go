@@ -5,50 +5,15 @@ package store_test
 import (
 	"context"
 	"errors"
-	"fmt"
 	"testing"
 
 	"github.com/milad-ahmd/gkit-go/pkg/store"
-	"github.com/testcontainers/testcontainers-go"
-	"github.com/testcontainers/testcontainers-go/wait"
+	"github.com/milad-ahmd/gkit-go/pkg/testutil"
 )
 
-func startPostgres(t *testing.T) string {
-	t.Helper()
-	ctx := context.Background()
-
-	c, err := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
-		ContainerRequest: testcontainers.ContainerRequest{
-			Image:        "postgres:16-alpine",
-			ExposedPorts: []string{"5432/tcp"},
-			Env: map[string]string{
-				"POSTGRES_USER":     "gkit",
-				"POSTGRES_PASSWORD": "secret",
-				"POSTGRES_DB":       "gkit",
-			},
-			WaitingFor: wait.ForListeningPort("5432/tcp"),
-		},
-		Started: true,
-	})
-	if err != nil {
-		t.Fatalf("start postgres: %v", err)
-	}
-	t.Cleanup(func() { _ = c.Terminate(ctx) })
-
-	host, _ := c.Host(ctx)
-	port, _ := c.MappedPort(ctx, "5432/tcp")
-	return fmt.Sprintf("postgres://gkit:secret@%s:%s/gkit?sslmode=disable", host, port.Port())
-}
-
 func TestStore_Integration_Ping(t *testing.T) {
-	connStr := startPostgres(t)
+	db := testutil.StartPostgres(t)
 	ctx := context.Background()
-
-	db, err := store.Open(ctx, connStr)
-	if err != nil {
-		t.Fatalf("open: %v", err)
-	}
-	defer db.Close()
 
 	if err := db.Ping(ctx); err != nil {
 		t.Fatalf("ping: %v", err)
@@ -56,14 +21,8 @@ func TestStore_Integration_Ping(t *testing.T) {
 }
 
 func TestStore_Integration_InsertAndQuery(t *testing.T) {
-	connStr := startPostgres(t)
+	db := testutil.StartPostgres(t)
 	ctx := context.Background()
-
-	db, err := store.Open(ctx, connStr)
-	if err != nil {
-		t.Fatalf("open: %v", err)
-	}
-	defer db.Close()
 
 	if err := db.Exec(ctx, `CREATE TABLE gkit_test (id SERIAL PRIMARY KEY, name TEXT NOT NULL)`); err != nil {
 		t.Fatalf("create table: %v", err)
@@ -82,14 +41,8 @@ func TestStore_Integration_InsertAndQuery(t *testing.T) {
 }
 
 func TestStore_Integration_TransactionCommit(t *testing.T) {
-	connStr := startPostgres(t)
+	db := testutil.StartPostgres(t)
 	ctx := context.Background()
-
-	db, err := store.Open(ctx, connStr)
-	if err != nil {
-		t.Fatalf("open: %v", err)
-	}
-	defer db.Close()
 
 	if err := db.Exec(ctx, `CREATE TABLE gkit_commit (id SERIAL PRIMARY KEY, val TEXT NOT NULL)`); err != nil {
 		t.Fatalf("create table: %v", err)
@@ -112,21 +65,15 @@ func TestStore_Integration_TransactionCommit(t *testing.T) {
 }
 
 func TestStore_Integration_TransactionRollback(t *testing.T) {
-	connStr := startPostgres(t)
+	db := testutil.StartPostgres(t)
 	ctx := context.Background()
-
-	db, err := store.Open(ctx, connStr)
-	if err != nil {
-		t.Fatalf("open: %v", err)
-	}
-	defer db.Close()
 
 	if err := db.Exec(ctx, `CREATE TABLE gkit_rollback (id SERIAL PRIMARY KEY, val TEXT NOT NULL)`); err != nil {
 		t.Fatalf("create table: %v", err)
 	}
 
 	intentional := errors.New("intentional rollback")
-	err = db.WithTx(ctx, func(ctx context.Context, tx *store.Tx) error {
+	err := db.WithTx(ctx, func(ctx context.Context, tx *store.Tx) error {
 		if _, err := tx.Exec(ctx, `INSERT INTO gkit_rollback (val) VALUES ($1)`, "should-not-exist"); err != nil {
 			return err
 		}
