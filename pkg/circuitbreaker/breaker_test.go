@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/miladhzz/gkit/pkg/circuitbreaker"
+	"github.com/milad-ahmd/gkit-go/pkg/circuitbreaker"
 )
 
 var errFake = errors.New("fake error")

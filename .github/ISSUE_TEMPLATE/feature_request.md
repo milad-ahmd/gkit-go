@@ -3,7 +3,7 @@ name: Feature Request
 about: Propose a new package or enhancement to an existing one
 title: "feat(<package>): <short description>"
 labels: ["enhancement"]
-assignees: miladhzz
+assignees: milad-ahmd
 ---
 
 ## Summary

@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/miladhzz/gkit/pkg/health"
+	"github.com/milad-ahmd/gkit-go/pkg/health"
 )
 
 var errFake = errors.New("dependency down")

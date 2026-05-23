@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/miladhzz/gkit/pkg/rediscache"
+	"github.com/milad-ahmd/gkit-go/pkg/rediscache"
 	"github.com/redis/go-redis/v9"
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"

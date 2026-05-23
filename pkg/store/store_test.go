@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/miladhzz/gkit/pkg/store"
+	"github.com/milad-ahmd/gkit-go/pkg/store"
 )
 
 // TestMain skips the whole package unless TEST_POSTGRES_DSN is set.

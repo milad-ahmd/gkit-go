@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/miladhzz/gkit/pkg/outbox"
-	"github.com/miladhzz/gkit/pkg/store"
+	"github.com/milad-ahmd/gkit-go/pkg/outbox"
+	"github.com/milad-ahmd/gkit-go/pkg/store"
 )
 
 func dsn(t *testing.T) string {

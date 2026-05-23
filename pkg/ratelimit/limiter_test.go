@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/miladhzz/gkit/pkg/ratelimit"
+	"github.com/milad-ahmd/gkit-go/pkg/ratelimit"
 )
 
 func TestLimiter_AllowsBurst(t *testing.T) {

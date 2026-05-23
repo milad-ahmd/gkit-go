@@ -26,12 +26,12 @@ Be kind and respectful. We follow the [Contributor Covenant v2.1](https://www.co
 
 1. **Fork** the repo and clone your fork:
    ```bash
-   git clone https://github.com/<your-handle>/gkit.git
-   cd gkit
+   git clone https://github.com/<your-handle>/gkit-go.git
+   cd gkit-go
    ```
 2. Add the upstream remote:
    ```bash
-   git remote add upstream https://github.com/miladhzz/gkit.git
+   git remote add upstream https://github.com/milad-ahmd/gkit-go.git
    ```
 3. Create a feature branch:
    ```bash
@@ -106,7 +106,7 @@ Rules:
 3. Add or update tests for any changed behaviour
 4. Update the relevant package doc comment if the API changes
 5. Fill out the PR template fully
-6. Request review from `@miladhzz`
+6. Request review from `@milad-ahmd`
 
 PRs that add a new package should include:
 - The package itself with a top-level doc comment

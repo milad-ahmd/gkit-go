@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/miladhzz/gkit/pkg/pool"
+	"github.com/milad-ahmd/gkit-go/pkg/pool"
 )
 
 func TestPool_ProcessesAllJobs(t *testing.T) {

@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/miladhzz/gkit/pkg/auth"
+	"github.com/milad-ahmd/gkit-go/pkg/auth"
 )
 
 var secret = []byte("super-secret-test-key")

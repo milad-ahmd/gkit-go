@@ -44,7 +44,7 @@ func New[V any](client *redis.Client, opts ...Option[V]) *Cache[V] {
 	return &Cache[V]{
 		client: client,
 		prefix: o.prefix,
-		tracer: otel.Tracer("github.com/miladhzz/gkit/pkg/rediscache"),
+		tracer: otel.Tracer("github.com/milad-ahmd/gkit-go/pkg/rediscache"),
 		log:    o.logger,
 	}
 }

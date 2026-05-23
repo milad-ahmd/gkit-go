@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/redis/go-redis/v9"
-	"github.com/miladhzz/gkit/pkg/rediscache"
+	"github.com/milad-ahmd/gkit-go/pkg/rediscache"
 )
 
 func redisClient(t *testing.T) *redis.Client {

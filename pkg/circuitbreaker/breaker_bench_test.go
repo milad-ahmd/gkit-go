@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/miladhzz/gkit/pkg/circuitbreaker"
+	"github.com/milad-ahmd/gkit-go/pkg/circuitbreaker"
 )
 
 func BenchmarkCircuitBreaker_Execute_Closed(b *testing.B) {

@@ -56,5 +56,5 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - `pkg/validation` — fluent field-level validator with built-in rules
 - `pkg/testutil` — test helpers
 
-[Unreleased]: https://github.com/miladhzz/gkit/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/miladhzz/gkit/releases/tag/v1.0.0
+[Unreleased]: https://github.com/milad-ahmd/gkit-go/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/milad-ahmd/gkit-go/releases/tag/v1.0.0

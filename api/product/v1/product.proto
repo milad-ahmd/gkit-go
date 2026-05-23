@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package product.v1;
 
-option go_package = "github.com/miladhzz/gkit/api/product/v1;productv1";
+option go_package = "github.com/milad-ahmd/gkit-go/api/product/v1;productv1";
 
 // ProductService manages a product catalog and accepts orders.
 service ProductService {

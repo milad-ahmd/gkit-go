@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/miladhzz/gkit/pkg/graceful"
+	"github.com/milad-ahmd/gkit-go/pkg/graceful"
 )
 
 func TestGroup_Shutdown_CallsHooksInReverseOrder(t *testing.T) {

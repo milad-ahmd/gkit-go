@@ -3,7 +3,7 @@ name: Bug Report
 about: Report a reproducible bug in one of the gkit packages
 title: "fix(<package>): <short description>"
 labels: ["bug"]
-assignees: miladhzz
+assignees: milad-ahmd
 ---
 
 ## Package

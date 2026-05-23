@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/miladhzz/gkit/pkg/store"
+	"github.com/milad-ahmd/gkit-go/pkg/store"
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"
 )

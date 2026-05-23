@@ -5,7 +5,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/miladhzz/gkit/pkg/retry"
+	"github.com/milad-ahmd/gkit-go/pkg/retry"
 )
 
 var errBench = errors.New("bench error")

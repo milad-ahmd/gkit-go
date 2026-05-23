@@ -3,7 +3,7 @@ package ratelimit_test
 import (
 	"testing"
 
-	"github.com/miladhzz/gkit/pkg/ratelimit"
+	"github.com/milad-ahmd/gkit-go/pkg/ratelimit"
 )
 
 func BenchmarkRateLimiter_Allow(b *testing.B) {

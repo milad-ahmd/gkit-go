@@ -3,7 +3,7 @@
 //
 // Register it once at startup, before creating any gRPC connections:
 //
-//	import "github.com/miladhzz/gkit/pkg/rpc/codec"
+//	import "github.com/milad-ahmd/gkit-go/pkg/rpc/codec"
 //	func init() { codec.Register() }
 package codec
 

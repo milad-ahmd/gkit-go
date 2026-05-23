@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/miladhzz/gkit/pkg/pipeline"
+	"github.com/milad-ahmd/gkit-go/pkg/pipeline"
 )
 
 func BenchmarkPipeline_Process_1Worker(b *testing.B) {

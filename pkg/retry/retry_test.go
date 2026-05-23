@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/miladhzz/gkit/pkg/retry"
+	"github.com/milad-ahmd/gkit-go/pkg/retry"
 )
 
 var errFake = errors.New("fake error")

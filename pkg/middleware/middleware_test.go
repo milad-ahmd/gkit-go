@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/miladhzz/gkit/pkg/middleware"
+	"github.com/milad-ahmd/gkit-go/pkg/middleware"
 )
 
 func okHandler() http.Handler {

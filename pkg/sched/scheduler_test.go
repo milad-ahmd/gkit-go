@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/miladhzz/gkit/pkg/sched"
+	"github.com/milad-ahmd/gkit-go/pkg/sched"
 )
 
 func TestScheduler_Every_RunsRepeatedly(t *testing.T) {

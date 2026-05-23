@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/miladhzz/gkit/pkg/pubsub"
+	"github.com/milad-ahmd/gkit-go/pkg/pubsub"
 )
 
 type OrderPlaced struct {

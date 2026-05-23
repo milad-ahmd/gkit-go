@@ -1,9 +1,9 @@
 # gkit
 
-[![CI](https://github.com/miladhzz/gkit/actions/workflows/ci.yml/badge.svg)](https://github.com/miladhzz/gkit/actions)
-[![Go Reference](https://pkg.go.dev/badge/github.com/miladhzz/gkit.svg)](https://pkg.go.dev/github.com/miladhzz/gkit)
-[![Go Report Card](https://goreportcard.com/badge/github.com/miladhzz/gkit)](https://goreportcard.com/report/github.com/miladhzz/gkit)
-[![Go 1.22+](https://img.shields.io/badge/Go-1.22+-00ADD8.svg)](https://golang.org/)
+[![CI](https://github.com/milad-ahmd/gkit-go/actions/workflows/ci.yml/badge.svg)](https://github.com/milad-ahmd/gkit-go/actions)
+[![Go Reference](https://pkg.go.dev/badge/github.com/milad-ahmd/gkit-go.svg)](https://pkg.go.dev/github.com/milad-ahmd/gkit-go)
+[![Go Report Card](https://goreportcard.com/badge/github.com/milad-ahmd/gkit-go)](https://goreportcard.com/report/github.com/milad-ahmd/gkit-go)
+[![Go 1.23+](https://img.shields.io/badge/Go-1.23+-00ADD8.svg)](https://golang.org/)
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 
 **gkit** is a collection of production-grade Go packages for building reliable, observable microservices.
@@ -52,7 +52,7 @@ Each package is independently importable, dependency-minimal, and designed for c
 ## Installation
 
 ```bash
-go get github.com/miladhzz/gkit
+go get github.com/milad-ahmd/gkit-go
 ```
 
 Requires **Go 1.22+**.
@@ -64,7 +64,7 @@ Requires **Go 1.22+**.
 Generic retry loop with pluggable backoff strategies and context propagation.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/retry"
+import "github.com/milad-ahmd/gkit-go/pkg/retry"
 
 user, err := retry.Do(ctx, func(ctx context.Context) (*User, error) {
     return db.FindUser(ctx, id)
@@ -92,7 +92,7 @@ user, err := retry.Do(ctx, func(ctx context.Context) (*User, error) {
 Bounded generic worker pool with configurable queue depth, error callbacks, and atomic stats.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/pool"
+import "github.com/milad-ahmd/gkit-go/pkg/pool"
 
 p := pool.New[Job](8, func(ctx context.Context, job Job) error {
     return processJob(ctx, job)
@@ -116,7 +116,7 @@ p.TrySubmit(job)     // non-blocking; ErrQueueFull if full
 Thread-safe generic LRU cache with optional TTL and background janitor.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/cache"
+import "github.com/milad-ahmd/gkit-go/pkg/cache"
 
 c := cache.New[string, *Product](10_000,
     cache.WithTTL[string, *Product](5 * time.Minute),
@@ -136,7 +136,7 @@ stats := c.Stats() // hits, misses, evictions
 Typed, in-process event bus. Each subscriber runs in its own goroutine.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/pubsub"
+import "github.com/milad-ahmd/gkit-go/pkg/pubsub"
 
 bus := pubsub.NewBus(slog.Default())
 
@@ -156,7 +156,7 @@ pubsub.Publish[OrderPlaced](bus, ctx, "orders.placed", OrderPlaced{ID: "123"})
 Shutdown coordinator — runs registered hooks in reverse order (LIFO) with a global timeout.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/graceful"
+import "github.com/milad-ahmd/gkit-go/pkg/graceful"
 
 g := graceful.New(graceful.WithTimeout(15 * time.Second))
 g.Register("database",    func(ctx context.Context) error { return db.Close() })
@@ -173,7 +173,7 @@ if err := g.ListenAndShutdown(ctx); err != nil { log.Fatal(err) }
 Prometheus integration with zero-copy snapshot collectors for pool and cache.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/metrics"
+import "github.com/milad-ahmd/gkit-go/pkg/metrics"
 
 reg := metrics.NewRegistry("myapp") // pre-registers Go + process collectors
 
@@ -203,7 +203,7 @@ http.Handle("/metrics", reg.Handler()) // OpenMetrics-compatible
 Health check system suitable for Kubernetes liveness and readiness probes.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/health"
+import "github.com/milad-ahmd/gkit-go/pkg/health"
 
 h := health.New(health.WithTimeout(3 * time.Second))
 
@@ -245,9 +245,9 @@ required to build or run the project.
 
 ```go
 import (
-    "github.com/miladhzz/gkit/pkg/rpc"
-    "github.com/miladhzz/gkit/pkg/rpc/codec"
-    "github.com/miladhzz/gkit/pkg/rpc/interceptors"
+    "github.com/milad-ahmd/gkit-go/pkg/rpc"
+    "github.com/milad-ahmd/gkit-go/pkg/rpc/codec"
+    "github.com/milad-ahmd/gkit-go/pkg/rpc/interceptors"
 )
 
 func init() { codec.Register() } // JSON-over-gRPC, no protoc required
@@ -291,7 +291,7 @@ Prometheus metrics exported:
 Generic circuit breaker with Closed → Open → HalfOpen state machine.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/circuitbreaker"
+import "github.com/milad-ahmd/gkit-go/pkg/circuitbreaker"
 
 cb := circuitbreaker.New("db",
     circuitbreaker.WithFailureThreshold(5),           // open after 5 consecutive failures
@@ -325,7 +325,7 @@ States:
 Token bucket rate limiter with an optional per-key variant for per-user/per-IP limiting.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/ratelimit"
+import "github.com/milad-ahmd/gkit-go/pkg/ratelimit"
 
 // Global limiter: 1000 req/s, burst of 100
 lim := ratelimit.New(1000, 100)
@@ -356,7 +356,7 @@ keyed.Evict() // call periodically to reclaim memory for expired keys
 HTTP middleware chain for `net/http` servers. Middlewares are applied in declaration order (first declared = outermost).
 
 ```go
-import "github.com/miladhzz/gkit/pkg/middleware"
+import "github.com/milad-ahmd/gkit-go/pkg/middleware"
 
 httpMetrics := middleware.NewHTTPMetrics(promReg)
 keyed       := ratelimit.NewKeyed[string](100, 10)
@@ -399,7 +399,7 @@ id := middleware.RequestIDFromContext(r.Context())
 Generic concurrent pipeline with fan-out worker pools and functional composition.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/pipeline"
+import "github.com/milad-ahmd/gkit-go/pkg/pipeline"
 
 // Fan-out: process N items concurrently with 4 workers
 results, err := pipeline.Process(ctx, items, 4,
@@ -434,7 +434,7 @@ All functions are fully generic, context-aware, and propagate errors correctly.
 OpenTelemetry tracing setup with OTLP gRPC export and gRPC stats handler integration.
 
 ```go
-import gkitotel "github.com/miladhzz/gkit/pkg/otel"
+import gkitotel "github.com/milad-ahmd/gkit-go/pkg/otel"
 
 // Init from environment (OTEL_EXPORTER_OTLP_ENDPOINT, OTEL_SERVICE_NAME, etc.)
 tp, err := gkitotel.NewTracerProvider(ctx,
@@ -474,7 +474,7 @@ Traces are exported to [Grafana Tempo](https://grafana.com/oss/tempo/) via OTLP 
 Job scheduler for periodic and one-shot deferred tasks with bounded concurrency.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/sched"
+import "github.com/milad-ahmd/gkit-go/pkg/sched"
 
 s := sched.New(
     sched.WithMaxConcurrency(4),
@@ -505,7 +505,7 @@ defer s.Stop()
 Test helpers to reduce boilerplate in unit and integration tests.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/testutil"
+import "github.com/milad-ahmd/gkit-go/pkg/testutil"
 
 // Assert condition is true within timeout (polls every 10ms)
 testutil.Eventually(t, 2*time.Second, func() bool {
@@ -536,7 +536,7 @@ Zero-dependency struct-based configuration loader. Reads from environment
 variables (and optionally a `.env` file) using struct field tags.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/config"
+import "github.com/milad-ahmd/gkit-go/pkg/config"
 
 type Config struct {
     HTTP struct {
@@ -577,7 +577,7 @@ Production PostgreSQL layer built on `pgx/v5`:
 - `Check(ctx)` implements `health.Checker`
 
 ```go
-import "github.com/miladhzz/gkit/pkg/store"
+import "github.com/milad-ahmd/gkit-go/pkg/store"
 
 db, err := store.Open(ctx, cfg.DB.DSN,
     store.WithMaxConns(20),
@@ -626,7 +626,7 @@ Generic Redis-backed cache with JSON serialization, OTel tracing, and
 `health.Checker`. Mirrors the `pkg/cache` API so the two are interchangeable.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/rediscache"
+import "github.com/milad-ahmd/gkit-go/pkg/rediscache"
 
 client := rediscache.NewClient(rediscache.ClientConfig{
     Addr:    cfg.Redis.Addr,
@@ -669,7 +669,7 @@ when the service crashes between the DB write and the broker publish.
    `SELECT FOR UPDATE SKIP LOCKED` for safe concurrent operation.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/outbox"
+import "github.com/milad-ahmd/gkit-go/pkg/outbox"
 
 // 1. Write event in the same tx as your domain data.
 err = db.WithTx(ctx, func(ctx context.Context, tx *store.Tx) error {
@@ -720,7 +720,7 @@ auto-renews the TTL at `ttl/3` intervals so the lock never expires under a
 live holder.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/lock"
+import "github.com/milad-ahmd/gkit-go/pkg/lock"
 
 locker := lock.New(redisClient,
     lock.WithRetry(10, 100*time.Millisecond), // retry up to 10× if held
@@ -747,7 +747,7 @@ are retried with exponential backoff; jobs exceeding `MaxAttempts` go to a
 `dead` state for inspection.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/queue"
+import "github.com/milad-ahmd/gkit-go/pkg/queue"
 
 q := queue.New(db, queue.WithPollInterval(2*time.Second))
 
@@ -781,7 +781,7 @@ JWT authentication middleware and RBAC for `net/http`. Tokens are HS256-signed.
 Claims are injected into the request context for downstream handlers.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/auth"
+import "github.com/milad-ahmd/gkit-go/pkg/auth"
 
 secret := []byte(os.Getenv("JWT_SECRET"))
 
@@ -814,7 +814,7 @@ control prevents split-brain writes. Snapshots allow fast aggregate
 reconstruction without replaying the full history.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/eventstore"
+import "github.com/milad-ahmd/gkit-go/pkg/eventstore"
 
 es := eventstore.New(db)
 
@@ -855,7 +855,7 @@ Saga orchestrator for distributed transactions. Steps execute in order; on
 failure, previously completed steps are compensated in **reverse order** (LIFO).
 
 ```go
-import "github.com/miladhzz/gkit/pkg/saga"
+import "github.com/milad-ahmd/gkit-go/pkg/saga"
 
 s := saga.New("place-order",
     saga.Step{
@@ -892,7 +892,7 @@ Struct validation via `validate` field tags. Returns a `*validation.Error` with
 a `Fields` map of field name → rule failures, suitable for JSON API error responses.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/validation"
+import "github.com/milad-ahmd/gkit-go/pkg/validation"
 
 type CreateOrderRequest struct {
     ProductID string  `json:"product_id" validate:"required"`
@@ -924,7 +924,7 @@ rollout (stable hash-based), and explicit allow-list. Fails safe (returns false)
 on any Redis error.
 
 ```go
-import "github.com/miladhzz/gkit/pkg/feature"
+import "github.com/milad-ahmd/gkit-go/pkg/feature"
 
 store := feature.NewStore(redisClient, feature.WithNamespace("myapp"))
 
@@ -960,7 +960,7 @@ directly on goroutines and channels — no sync.Mutex where a channel suffices.
 ### Future[T] — asynchronous value
 
 ```go
-import "github.com/miladhzz/gkit/pkg/async"
+import "github.com/milad-ahmd/gkit-go/pkg/async"
 
 // Spawn N concurrent operations.
 userFuture    := async.Async(ctx, func(ctx context.Context) (*User,    error) { return db.GetUser(ctx, id) })

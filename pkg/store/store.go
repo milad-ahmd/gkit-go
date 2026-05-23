@@ -51,7 +51,7 @@ func Open(ctx context.Context, dsn string, opts ...Option) (*DB, error) {
 	}
 
 	db := &DB{
-		tracer: otel.Tracer("github.com/miladhzz/gkit/pkg/store"),
+		tracer: otel.Tracer("github.com/milad-ahmd/gkit-go/pkg/store"),
 		log:    o.logger,
 	}
 

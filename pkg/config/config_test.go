@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/miladhzz/gkit/pkg/config"
+	"github.com/milad-ahmd/gkit-go/pkg/config"
 )
 
 type testCfg struct {

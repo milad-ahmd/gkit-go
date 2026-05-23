@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/miladhzz/gkit/pkg/eventstore"
-	"github.com/miladhzz/gkit/pkg/store"
+	"github.com/milad-ahmd/gkit-go/pkg/eventstore"
+	"github.com/milad-ahmd/gkit-go/pkg/store"
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"
 )

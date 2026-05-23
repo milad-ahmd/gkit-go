@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/miladhzz/gkit/pkg/metrics"
+	"github.com/milad-ahmd/gkit-go/pkg/metrics"
 )
 
 func TestRegistry_HandlerExposesMetrics(t *testing.T) {

@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/miladhzz/gkit/pkg/cache"
+	"github.com/milad-ahmd/gkit-go/pkg/cache"
 )
 
 func TestCache_SetAndGet(t *testing.T) {

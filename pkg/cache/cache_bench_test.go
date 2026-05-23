@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/miladhzz/gkit/pkg/cache"
+	"github.com/milad-ahmd/gkit-go/pkg/cache"
 )
 
 func BenchmarkCache_Set(b *testing.B) {

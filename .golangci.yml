@@ -16,7 +16,7 @@ linters:
 
 linters-settings:
   goimports:
-    local-prefixes: github.com/miladhzz/gkit
+    local-prefixes: github.com/milad-ahmd/gkit-go
   revive:
     rules:
       - name: exported

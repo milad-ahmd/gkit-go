@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/miladhzz/gkit/pkg/async"
+	"github.com/milad-ahmd/gkit-go/pkg/async"
 )
 
 // --------------------------------------------------------------------------

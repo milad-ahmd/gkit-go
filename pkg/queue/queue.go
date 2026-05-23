@@ -56,7 +56,7 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5"
-	"github.com/miladhzz/gkit/pkg/store"
+	"github.com/milad-ahmd/gkit-go/pkg/store"
 )
 
 // Handler processes a job of a specific type.

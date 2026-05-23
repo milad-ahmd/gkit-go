@@ -13,7 +13,7 @@
 
 Report vulnerabilities privately via **GitHub's Security Advisory** feature:
 
-1. Go to the [Security tab](https://github.com/miladhzz/gkit/security/advisories) of this repository
+1. Go to the [Security tab](https://github.com/milad-ahmd/gkit-go/security/advisories) of this repository
 2. Click **"Report a vulnerability"**
 3. Fill in the details: affected package(s), Go version, reproduction steps, and impact
 

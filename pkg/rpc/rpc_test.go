@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	productv1 "github.com/miladhzz/gkit/api/product/v1"
-	"github.com/miladhzz/gkit/pkg/rpc"
-	"github.com/miladhzz/gkit/pkg/rpc/codec"
-	"github.com/miladhzz/gkit/pkg/rpc/interceptors"
+	productv1 "github.com/milad-ahmd/gkit-go/api/product/v1"
+	"github.com/milad-ahmd/gkit-go/pkg/rpc"
+	"github.com/milad-ahmd/gkit-go/pkg/rpc/codec"
+	"github.com/milad-ahmd/gkit-go/pkg/rpc/interceptors"
 	"google.golang.org/grpc"
 )
 
