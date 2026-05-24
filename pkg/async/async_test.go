@@ -189,8 +189,13 @@ func TestFanIn(t *testing.T) {
 	ctx := context.Background()
 	a := make(chan int, 3)
 	b := make(chan int, 3)
-	a <- 1; a <- 2; a <- 3; close(a)
-	b <- 4; b <- 5; close(b)
+	a <- 1
+	a <- 2
+	a <- 3
+	close(a)
+	b <- 4
+	b <- 5
+	close(b)
 
 	out := async.FanIn(ctx, a, b)
 	var items []int
@@ -207,7 +212,10 @@ func TestTee_BothReceive(t *testing.T) {
 	defer cancel()
 
 	in := make(chan int, 3)
-	in <- 1; in <- 2; in <- 3; close(in)
+	in <- 1
+	in <- 2
+	in <- 3
+	close(in)
 
 	a, b := async.Tee(ctx, in)
 	var as, bs []int

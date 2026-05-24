@@ -127,7 +127,7 @@ func TestBreaker_OnStateChange(t *testing.T) {
 	ctx := context.Background()
 
 	circuitbreaker.Execute(ctx, cb, func(_ context.Context) (int, error) { return 0, errFake }) //nolint:errcheck
-	time.Sleep(30 * time.Millisecond) // trigger HalfOpen
+	time.Sleep(30 * time.Millisecond)                                                           // trigger HalfOpen
 	cb.State()
 
 	time.Sleep(10 * time.Millisecond) // let callback goroutine run

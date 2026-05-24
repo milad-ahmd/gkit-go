@@ -150,12 +150,12 @@ func (l *Lock) keepalive() {
 // Returns ErrNotAcquired if the lock is already held.
 func (l *Locker) TryAcquire(ctx context.Context, key string, ttl time.Duration) (*Lock, error) {
 	token := uuid.New().String()
-	ok, err := l.client.SetNX(ctx, key, token, ttl).Result()
+	err := l.client.SetArgs(ctx, key, token, redis.SetArgs{Mode: "NX", TTL: ttl}).Err()
 	if err != nil {
-		return nil, fmt.Errorf("lock: setnx %q: %w", key, err)
-	}
-	if !ok {
-		return nil, ErrNotAcquired
+		if errors.Is(err, redis.Nil) {
+			return nil, ErrNotAcquired
+		}
+		return nil, fmt.Errorf("lock: acquire %q: %w", key, err)
 	}
 	lk := &Lock{
 		client: l.client,

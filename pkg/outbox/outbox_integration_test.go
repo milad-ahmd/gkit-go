@@ -26,13 +26,19 @@ CREATE TABLE IF NOT EXISTS outbox_events (
 // mockPublisher records published events.
 type mockPublisher struct {
 	mu     sync.Mutex
-	events []struct{ topic string; payload []byte }
+	events []struct {
+		topic   string
+		payload []byte
+	}
 }
 
 func (m *mockPublisher) Publish(_ context.Context, topic string, payload []byte) error {
 	m.mu.Lock()
 	defer m.mu.Unlock()
-	m.events = append(m.events, struct{ topic string; payload []byte }{topic, payload})
+	m.events = append(m.events, struct {
+		topic   string
+		payload []byte
+	}{topic, payload})
 	return nil
 }
 

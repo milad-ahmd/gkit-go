@@ -269,16 +269,24 @@ func main() {
 	// ── Graceful Shutdown ─────────────────────────────────────────────────
 	g := graceful.New(graceful.WithTimeout(15 * time.Second))
 	g.Register("scheduler", func(_ context.Context) error {
-		logger.Info("stopping scheduler"); cancel(); scheduler.Stop(); return nil
+		logger.Info("stopping scheduler")
+		cancel()
+		scheduler.Stop()
+		return nil
 	})
 	g.Register("grpc-server", func(_ context.Context) error {
-		logger.Info("shutting down gRPC server"); grpcSrv.GracefulStop(); return nil
+		logger.Info("shutting down gRPC server")
+		grpcSrv.GracefulStop()
+		return nil
 	})
 	g.Register("http-server", func(ctx context.Context) error {
-		logger.Info("shutting down HTTP server"); return httpSrv.Shutdown(ctx)
+		logger.Info("shutting down HTTP server")
+		return httpSrv.Shutdown(ctx)
 	})
 	g.Register("order-pool", func(_ context.Context) error {
-		logger.Info("draining order pool"); orderPool.Stop(); return nil
+		logger.Info("draining order pool")
+		orderPool.Stop()
+		return nil
 	})
 
 	go func() {
@@ -295,7 +303,8 @@ func main() {
 	}()
 
 	if err := g.ListenAndShutdown(ctx); err != nil {
-		logger.Error("shutdown error", slog.Any("error", err)); os.Exit(1)
+		logger.Error("shutdown error", slog.Any("error", err))
+		os.Exit(1)
 	}
 	logger.Info("server stopped gracefully")
 }

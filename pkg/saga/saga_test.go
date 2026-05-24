@@ -11,7 +11,7 @@ import (
 var errFail = errors.New("step failed")
 var errComp = errors.New("compensation failed")
 
-func ok(_ context.Context) error  { return nil }
+func ok(_ context.Context) error   { return nil }
 func fail(_ context.Context) error { return errFail }
 
 func TestSaga_AllStepsSucceed(t *testing.T) {

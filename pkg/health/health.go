@@ -45,9 +45,9 @@ type Status struct {
 
 // Report is the full health-check result.
 type Report struct {
-	Healthy  bool              `json:"healthy"`
-	Checks   []Status          `json:"checks"`
-	Duration string            `json:"duration"`
+	Healthy  bool     `json:"healthy"`
+	Checks   []Status `json:"checks"`
+	Duration string   `json:"duration"`
 }
 
 type registration struct {
@@ -57,9 +57,9 @@ type registration struct {
 
 // Group runs a set of named health checks.
 type Group struct {
-	mu       sync.RWMutex
-	checks   []registration
-	timeout  time.Duration
+	mu      sync.RWMutex
+	checks  []registration
+	timeout time.Duration
 }
 
 // New creates a Group with a default per-check timeout of 5 seconds.

@@ -125,7 +125,7 @@ type Queue struct {
 }
 
 // New creates a Queue backed by the given DB.
-func New(db *store.DB, opts ...QueueOption) *Queue {
+func New(db *store.DB, opts ...Option) *Queue {
 	q := &Queue{
 		db:       db,
 		handlers: make(map[string]Handler),
@@ -140,16 +140,16 @@ func New(db *store.DB, opts ...QueueOption) *Queue {
 	return q
 }
 
-// QueueOption configures a Queue.
-type QueueOption func(*Queue)
+// Option configures a Queue.
+type Option func(*Queue)
 
 // WithPollInterval sets how often workers poll for pending jobs (default: 2s).
-func WithPollInterval(d time.Duration) QueueOption {
+func WithPollInterval(d time.Duration) Option {
 	return func(q *Queue) { q.poll = d }
 }
 
 // WithQueueLogger sets the logger.
-func WithQueueLogger(l *slog.Logger) QueueOption {
+func WithQueueLogger(l *slog.Logger) Option {
 	return func(q *Queue) { q.log = l }
 }
 

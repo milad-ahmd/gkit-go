@@ -41,9 +41,9 @@ type rawHandler struct {
 
 // Bus is a topic-based event bus. The zero value is ready to use.
 type Bus struct {
-	mu      sync.RWMutex
-	subs    map[string][]*rawHandler
-	logger  *slog.Logger
+	mu     sync.RWMutex
+	subs   map[string][]*rawHandler
+	logger *slog.Logger
 }
 
 // NewBus creates a Bus with an optional structured logger for error reporting.

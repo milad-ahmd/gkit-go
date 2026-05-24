@@ -93,8 +93,11 @@ func TestKeyedLimiter_PerKeyIsolation(t *testing.T) {
 	kl := ratelimit.NewKeyed[string](10, 2)
 
 	// "alice" can consume 2 tokens.
-	if !kl.Allow("alice") || !kl.Allow("alice") {
-		t.Fatal("expected alice's burst to be available")
+	if !kl.Allow("alice") {
+		t.Fatal("expected alice's first token to be available")
+	}
+	if !kl.Allow("alice") {
+		t.Fatal("expected alice's second token to be available")
 	}
 	if kl.Allow("alice") {
 		t.Fatal("expected alice to be rate-limited after burst")

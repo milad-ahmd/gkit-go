@@ -6,7 +6,7 @@ import (
 
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/pgx/v5" // pgx/v5 driver
-	_ "github.com/golang-migrate/migrate/v4/source/file"      // file:// source
+	_ "github.com/golang-migrate/migrate/v4/source/file"     // file:// source
 )
 
 // MigrateUp runs all pending up migrations from the given source URL.

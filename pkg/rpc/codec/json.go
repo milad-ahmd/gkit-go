@@ -24,8 +24,8 @@ const (
 // jsonCodec implements encoding.Codec using the standard library's encoding/json.
 type jsonCodec struct{ name string }
 
-func (c jsonCodec) Name() string              { return c.name }
-func (jsonCodec) Marshal(v any) ([]byte, error) { return json.Marshal(v) }
+func (c jsonCodec) Name() string                     { return c.name }
+func (jsonCodec) Marshal(v any) ([]byte, error)      { return json.Marshal(v) }
 func (jsonCodec) Unmarshal(data []byte, v any) error { return json.Unmarshal(data, v) }
 
 // Register installs the JSON codec into the gRPC codec registry under both

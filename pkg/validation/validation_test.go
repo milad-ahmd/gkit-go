@@ -10,12 +10,12 @@ import (
 var v = validation.New()
 
 type order struct {
-	ProductID string  `json:"product_id" validate:"required"`
-	Quantity  int     `json:"quantity"   validate:"required,min=1,max=1000"`
-	Email     string  `json:"email"      validate:"required,email"`
-	Status    string  `json:"status"     validate:"oneof=pending|active|cancelled"`
-	Note      string  `json:"note"       validate:"max=500"`
-	Code      string  `json:"code"       validate:"regex=^[A-Z]{3}[0-9]{3}$"`
+	ProductID string `json:"product_id" validate:"required"`
+	Quantity  int    `json:"quantity"   validate:"required,min=1,max=1000"`
+	Email     string `json:"email"      validate:"required,email"`
+	Status    string `json:"status"     validate:"oneof=pending|active|cancelled"`
+	Note      string `json:"note"       validate:"max=500"`
+	Code      string `json:"code"       validate:"regex=^[A-Z]{3}[0-9]{3}$"`
 }
 
 func TestValidate_Valid(t *testing.T) {
