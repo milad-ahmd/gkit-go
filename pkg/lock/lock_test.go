@@ -9,8 +9,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/milad-ahmd/gkit-go/pkg/lock"
 	"github.com/redis/go-redis/v9"
+
+	"github.com/milad-ahmd/gkit-go/pkg/lock"
 )
 
 func redisClient(t *testing.T) *redis.Client {

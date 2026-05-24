@@ -8,10 +8,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/milad-ahmd/gkit-go/pkg/rediscache"
 	"github.com/redis/go-redis/v9"
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"
+
+	"github.com/milad-ahmd/gkit-go/pkg/rediscache"
 )
 
 func startRedis(t *testing.T) *redis.Client {

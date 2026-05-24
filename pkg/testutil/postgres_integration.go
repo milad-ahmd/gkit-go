@@ -8,9 +8,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/milad-ahmd/gkit-go/pkg/store"
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"
+
+	"github.com/milad-ahmd/gkit-go/pkg/store"
 )
 
 // StartPostgres starts a Postgres testcontainer and returns an open store.DB.

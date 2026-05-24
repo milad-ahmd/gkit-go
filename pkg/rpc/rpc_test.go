@@ -7,11 +7,12 @@ import (
 	"testing"
 	"time"
 
+	"google.golang.org/grpc"
+
 	productv1 "github.com/milad-ahmd/gkit-go/api/product/v1"
 	"github.com/milad-ahmd/gkit-go/pkg/rpc"
 	"github.com/milad-ahmd/gkit-go/pkg/rpc/codec"
 	"github.com/milad-ahmd/gkit-go/pkg/rpc/interceptors"
-	"google.golang.org/grpc"
 )
 
 func init() {
